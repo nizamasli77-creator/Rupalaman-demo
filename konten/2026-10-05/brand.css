@@ -1,0 +1,26 @@
+@font-face{font-family:B;src:url(../../brand/fonts/Bricolage-800.ttf);font-weight:800}
+@font-face{font-family:B;src:url(../../brand/fonts/Bricolage-700.ttf);font-weight:700}
+@font-face{font-family:J;src:url(../../brand/fonts/Jakarta-400.ttf);font-weight:400}
+@font-face{font-family:J;src:url(../../brand/fonts/Jakarta-600.ttf);font-weight:600}
+@font-face{font-family:J;src:url(../../brand/fonts/Jakarta-700.ttf);font-weight:700}
+@font-face{font-family:M;src:url(../../brand/fonts/Mono-500.ttf);font-weight:500}
+:root{--giok:#0B6E5A;--tua:#06382E;--mangga:#FFB238;--mint:#CFEBDD;--kabut:#F4F9F6;--tinta:#0F2A22}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#ccc}
+#stage{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:J,sans-serif;color:var(--tinta);background:var(--kabut)}
+#stage.dark{background:var(--tua);color:#fff}
+.pad{position:absolute;inset:0;padding:96px 88px}
+.kicker{font-family:M;font-weight:500;font-size:30px;letter-spacing:.06em;text-transform:uppercase;color:var(--giok)}
+.dark .kicker{color:var(--mint)}
+h1{font-family:B;font-weight:800;line-height:1.02;letter-spacing:-.02em}
+h2{font-family:B;font-weight:700;line-height:1.08;letter-spacing:-.01em}
+.mangga{color:var(--mangga)} .giok{color:var(--giok)}
+.foot{position:absolute;left:88px;right:88px;bottom:72px;display:flex;justify-content:space-between;align-items:center;font-family:M;font-size:26px;color:var(--giok)}
+.dark .foot{color:var(--mint)}
+.foot .brand{display:flex;align-items:center;gap:16px;font-family:B;font-weight:700;font-size:32px;color:var(--tinta)}
+.dark .foot .brand{color:#fff}
+.foot img{width:56px;height:56px}
+.num{font-family:B;font-weight:800;font-size:220px;line-height:.9;color:var(--mangga)}
+.pill{display:inline-block;background:var(--mangga);color:var(--tinta);font-family:J;font-weight:700;border-radius:999px;padding:18px 34px;font-size:34px}
+.phone{position:absolute;border-radius:56px;background:#111;padding:16px;box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.phone img{display:block;width:100%;border-radius:42px}

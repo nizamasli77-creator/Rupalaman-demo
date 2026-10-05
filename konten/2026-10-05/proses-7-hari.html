@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css"><style>
+#stage{width:1080px;height:1920px;background:var(--tua);color:#fff}
+.sc{position:absolute;inset:0;padding:330px 100px 380px 90px;opacity:0}
+.big{font-family:B;font-weight:800;line-height:1.02;letter-spacing:-.02em}
+.search{background:#fff;color:var(--tinta);border-radius:999px;padding:34px 46px;font-size:46px;display:flex;align-items:center;gap:26px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.res{margin-top:40px;background:rgba(255,255,255,.08);border:3px dashed #3c6b60;border-radius:32px;padding:44px;font-size:42px;color:var(--mint)}
+.day{font-family:M;font-size:44px;color:var(--mangga);letter-spacing:.04em}
+.bar{position:absolute;left:90px;right:100px;top:1520px;height:18px;background:#0B4C3F;border-radius:9px}
+.bar i{display:block;height:100%;background:var(--mangga);border-radius:9px;width:0}
+.dots{position:absolute;left:90px;right:100px;top:1570px;display:flex;justify-content:space-between;font-family:M;font-size:30px;color:var(--mint)}
+.win{background:var(--kabut);border-radius:36px;height:560px;margin-top:60px;padding:40px;overflow:hidden;position:relative}
+.blk{background:#d7e8df;border-radius:18px;margin-bottom:24px;transform-origin:left;}
+</style></head><body><div id="stage">
+<div class="sc" id="s1">
+ <div class="big" style="font-size:118px">Usahamu ramai…</div>
+ <div class="big mangga" style="font-size:118px;margin-top:10px">tapi dicari di Google nggak ada?</div>
+ <div class="search" style="margin-top:90px"><svg width="46" height="46" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7" stroke="#0B6E5A" stroke-width="3" fill="none"/><path d="M15 15l6 6" stroke="#0B6E5A" stroke-width="3"/></svg><span id="typed"></span><span id="caret" style="width:4px;height:52px;background:var(--giok)"></span></div>
+ <div class="res" id="nores">Tidak ada website. Pelanggan baru pindah ke tempat lain.</div>
+</div>
+<div class="sc" id="s2">
+ <div class="day">Cara Rupa Laman</div>
+ <div class="big" style="font-size:150px;margin-top:30px">Ini prosesnya.</div>
+ <div class="big mangga" style="font-size:300px;margin-top:20px" id="seven">7 hari.</div>
+</div>
+<div class="sc" id="s3">
+ <div class="day" id="dlabel">HARI 1</div>
+ <div class="big" style="font-size:96px;margin-top:24px;min-height:300px" id="dtext"></div>
+ <div class="win" id="win">
+  <div class="blk" id="b1" style="height:90px;width:60%;background:var(--giok)"></div>
+  <div class="blk" id="b2" style="height:200px;width:100%"></div>
+  <div class="blk" id="b3" style="height:70px;width:45%;background:var(--mangga)"></div>
+  <div class="blk" id="b4" style="height:110px;width:100%"></div>
+ </div>
+</div>
+<div class="bar" id="bar"><i id="fill"></i></div>
+<div class="dots" id="dots"><span>H1</span><span>H2</span><span>H3</span><span>H4</span><span>H5</span><span>H6</span><span>H7</span></div>
+<div class="sc" id="s4">
+ <img src="../../brand/logo/rupalaman-mark.svg" style="width:150px">
+ <div class="big" style="font-size:132px;margin-top:60px">Sudah ramai.</div>
+ <div class="big mangga" style="font-size:132px">Saatnya ditemukan.</div>
+ <div style="font-size:50px;margin-top:70px;color:var(--mint);line-height:1.35">Kirim nama usahamu.<br>Contoh tampilan website <b style="color:#fff">gratis</b>.</div>
+ <div class="pill" style="margin-top:70px;font-size:46px;padding:26px 46px">DM @rupalaman.id</div>
+</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=x=>1-Math.pow(1-cl(x),3);
+const days=[["HARI 1","Ngobrol, kirim foto & info usaha."],["HARI 2","Contoh tampilan gratis jadi."],["HARI 3–5","Halaman dibangun."],["HARI 6","Revisi bareng."],["HARI 7","Online. Tinggal bagikan link."]];
+function vis(el,t,a,b,fade=.25){let o=cl((t-a)/fade)*cl((b-t)/fade);$(el).style.opacity=o;return o}
+window.__render=function(t){
+ // scene 1: 0-3.2
+ vis('s1',t,-1,3.2);
+ const q="nama usahamu"; $('typed').textContent=q.slice(0,Math.floor(cl((t-0.3)/1.0)*q.length));
+ $('caret').style.opacity=(Math.floor(t*3)%2)?0:1;
+ $('nores').style.opacity=ease((t-1.4)/.3); $('nores').style.transform=`translateY(${(1-ease((t-1.4)/.3))*30}px)`;
+ // scene 2: 3.2-5
+ vis('s2',t,3.2,5.0); const k=ease((t-3.6)/.4); $('seven').style.transform=`scale(${.6+.4*k})`; $('seven').style.transformOrigin='left';
+ // scene 3: 5-11.5
+ const o3=vis('s3',t,5,11.5); $('bar').style.opacity=o3; $('dots').style.opacity=o3;
+ const idx=Math.min(4,Math.floor(cl((t-5)/6.5)*5));
+ const T=[4,100/6,400/6,500/6,100]; const seg=6.5/5, st=5+idx*seg; const prev=idx?T[idx-1]:0; const w=prev+(T[idx]-prev)*ease((t-st)/.5); $('fill').style.width=w+'%'; $('dlabel').textContent=days[idx][0]; $('dtext').textContent=days[idx][1];
+ const bt=t-5; ['b1','b2','b3','b4'].forEach((b,i)=>{$(b).style.transform=`scaleX(${ease((bt-1.3-i*.9)/.5)})`});
+ $('win').style.outline = idx==4 ? '8px solid #FFB238':'none';
+ // scene 4: 11.5-15
+ vis('s4',t,11.5,99); 
+};
+window.__render(0);
+</script></body></html>
